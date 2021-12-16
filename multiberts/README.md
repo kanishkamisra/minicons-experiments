@@ -1,8 +1,8 @@
 # Access the multi-berts
 
-The multi-bert models used in this project involve the 5 bert-base models, each of which accompanied by 28 different checkpoints at every 20000 steps upto the 200,000th step, and then after every 100,000 steps, giving us a whopping 140 different models.
+[Sellam et al. (2021)](https://arxiv.org/abs/2106.16163) released 25 different bert-base replications to facilitate robust analyses of the bert training procedure. Additionally for five of those models, they also released 28 different checkpoints at every 20000 steps upto the 200,000th step, and then after every 100,000 steps, giving us a whopping 140 different model checkpoints on which we can run analyses on. We use these 140 checkpoints for our BLiMP analyses.
 
-Download the multi-bert models from the google storage space made available by the authors of the original paper:
+Download the multi-bert models from the google storage space made available by Sellam et al. (2021):
 
 ```bash
 for ckpt in {0..4} ; do
@@ -11,7 +11,7 @@ for ckpt in {0..4} ; do
 done
 ```
 
-Notice that these models are in the tensorflow format. The transformers library gives us a very convenient tool to convert tensorflow transformer models to pytorch models, easily accessible through minicons. To this end, run the following script:
+Notice that these models are in the tensorflow format. The `transformers` library gives us a very convenient tool to convert tensorflow transformer models to pytorch models, easily accessible through minicons. To this end, run the following script:
 
 ```bash
 bash convert_models.sh
@@ -39,7 +39,7 @@ from minicons import scorer
 
 lm = scorer.MaskedLMScorer('seed_0/step_100000')
 
-lm.token_score(['The cat sat on the mat.'])
+lm.token_score(['The cat sat on the mat.'], prob = True)
 
 '''
 [[('the', 0.4109024107456207),
@@ -50,9 +50,12 @@ lm.token_score(['The cat sat on the mat.'])
   ('mat', 0.0021842767018824816),
   ('.', 0.9733330011367798)]]
 '''
-
 ```
 
 Fin!
+
+## References
+
+Sellam, T., Yadlowsky, S., Wei, J., Saphra, N., D'Amour, A., Linzen, T., ... & Pavlick, E. (2021). The multiberts: Bert reproductions for robustness analysis. arXiv preprint arXiv:2106.16163.
 
 
