@@ -1,3 +1,6 @@
+# purge the multi-berts
+multiberts/seed*
+
 # DS Store I hate you
 .DS_Store
 
