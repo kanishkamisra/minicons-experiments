@@ -1,3 +1,7 @@
+# purge large results
+data/results/blimp_multiberts*.csv
+data/results/multiberts*.tar.gz
+
 # purge the multi-berts
 multiberts/seed*
 
