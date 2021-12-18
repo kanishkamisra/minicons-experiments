@@ -6,7 +6,7 @@ data/results/multiberts*.tar.gz
 multiberts/seed*
 
 # DS Store I hate you
-.DS_Store
+*.DS_Store
 
 # History files
 .Rhistory
