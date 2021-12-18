@@ -56,5 +56,5 @@ for file in tqdm(os.listdir("../data/blimp/")):
 
 with open(f"../data/results/blimp_{model_name}_results.csv", "w") as f:
     writer = csv.writer(f)
-    writer.writerow(['instance_id', 'field', 'topic', 'phenomena', 'seed', 'step', 'good', 'bad'])
+    writer.writerow(['instance_id', 'field', 'topic', 'phenomena', 'good', 'bad'])
     writer.writerows(blimp_results)
