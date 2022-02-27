@@ -1,0 +1,3 @@
+model,split,accuracy
+gpt2-xl,dev,0.5796344647519582
+gpt2-xl,test,0.5701209545603139

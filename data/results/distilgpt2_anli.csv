@@ -1,0 +1,3 @@
+model,split,accuracy
+distilgpt2,dev,0.5143603133159269
+distilgpt2,test,0.5132396207911082

@@ -71,6 +71,11 @@ else:
 
 lm = scorer.IncrementalLMScorer(args.model, device = device)
 
+if '/' in args.model:
+    model = args.model.replace("/", "_")
+else:
+    model = args.model
+
 splits = ['dev', 'test']
 
 split_results = []
@@ -90,8 +95,11 @@ for split in splits:
     predicted = torch.stack((torch.tensor(hyp1_scores), torch.tensor(hyp2_scores))).argmax(0)+1
 
     acc = accuracy_score(labels, predicted)
-    split_results.append(args.model, split, acc)
+    split_results.append([model, split, acc])
 
-with open(f"../results/{args.model}_anli.csv", "w") as f:
+with open(f"../data/results/{model}_anli.csv", "w") as f:
     writer = csv.writer(f)
     writer.writerow(['model', 'split', 'accuracy'])
+    writer.writerows(split_results)
+
+print(split_results)

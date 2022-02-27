@@ -1,0 +1,3 @@
+model,split,accuracy
+openai-gpt,dev,0.5267624020887729
+openai-gpt,test,0.5204315135665251

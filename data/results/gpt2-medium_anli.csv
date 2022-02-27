@@ -1,0 +1,3 @@
+model,split,accuracy
+gpt2-medium,dev,0.5391644908616188
+gpt2-medium,test,0.5485452762340635
