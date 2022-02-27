@@ -2,6 +2,8 @@
 data/results/blimp_multiberts*.csv
 data/results/multiberts*.tar.gz
 
+.vscode/*
+
 # purge the multi-berts
 multiberts/seed*
 
