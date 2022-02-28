@@ -41,7 +41,7 @@ parser.add_argument(
 parser.add_argument(
     "--nworkers",
     "-n",
-    default = 12,
+    default = 20,
     type = int,
     help = "Number of workers for the dataloader"
 )
@@ -62,6 +62,12 @@ parser.add_argument(
     help = "Device to run inference on (-1 for cpu, else use cuda device)"
 )
 
+parser.add_argument(
+    "--mlm",
+    action="store_true",
+    help = "flag to indicate masked language models, uses incremental models if not provided"
+)
+
 args = parser.parse_args()
 
 if args.device == -1:
@@ -69,7 +75,12 @@ if args.device == -1:
 else:
     device = f'cuda:{args.device}'
 
-lm = scorer.IncrementalLMScorer(args.model, device = device)
+if args.mlm:
+    lm = scorer.MaskedLMScorer(args.model, device = device)
+else:
+    lm = scorer.IncrementalLMScorer(args.model, device = device)
+
+params = lm.model.num_parameters()
 
 if '/' in args.model:
     model = args.model.replace("/", "_")
@@ -95,11 +106,11 @@ for split in splits:
     predicted = torch.stack((torch.tensor(hyp1_scores), torch.tensor(hyp2_scores))).argmax(0)+1
 
     acc = accuracy_score(labels, predicted)
-    split_results.append([model, split, acc])
+    split_results.append([model, split, acc, params])
 
-with open(f"../data/results/{model}_anli.csv", "w") as f:
+with open(f"../data/results/anli/{model}_anli.csv", "w") as f:
     writer = csv.writer(f)
-    writer.writerow(['model', 'split', 'accuracy'])
+    writer.writerow(['model', 'split', 'accuracy', 'parameters'])
     writer.writerows(split_results)
 
 print(split_results)
