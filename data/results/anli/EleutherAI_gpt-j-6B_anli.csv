@@ -1,0 +1,3 @@
+model,split,accuracy,parameters
+EleutherAI_gpt-j-6B,dev,0.6005221932114883,6050890977
+EleutherAI_gpt-j-6B,test,0.611964694344557,6050890977
