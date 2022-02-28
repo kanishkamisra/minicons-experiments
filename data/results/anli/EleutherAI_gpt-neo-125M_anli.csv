@@ -1,0 +1,3 @@
+model,split,accuracy,parameters
+EleutherAI_gpt-neo-125M,dev,0.5163185378590078,125199360
+EleutherAI_gpt-neo-125M,test,0.513893429225237,125199360

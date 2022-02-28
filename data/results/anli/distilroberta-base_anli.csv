@@ -1,0 +1,3 @@
+model,split,accuracy,parameters
+distilroberta-base,dev,0.5287206266318538,82170201
+distilroberta-base,test,0.5230467473030402,82170201

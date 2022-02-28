@@ -1,3 +1,3 @@
-model,split,accuracy
-EleutherAI_gpt-neo-1.3B,dev,0.5483028720626631
-EleutherAI_gpt-neo-1.3B,test,0.5590062111801242
+model,split,accuracy,parameters
+EleutherAI_gpt-neo-1.3B,dev,0.5483028720626631,1315577856
+EleutherAI_gpt-neo-1.3B,test,0.5590062111801242,1315577856

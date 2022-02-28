@@ -1,0 +1,3 @@
+model,split,accuracy,parameters
+roberta-large,dev,0.5659268929503917,355412057
+roberta-large,test,0.5910428244524354,355412057

@@ -1,0 +1,3 @@
+model,split,accuracy,parameters
+albert-base-v2,dev,0.5195822454308094,11221680
+albert-base-v2,test,0.538411245505067,11221680

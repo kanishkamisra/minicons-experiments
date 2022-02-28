@@ -1,0 +1,3 @@
+model,split,accuracy,parameters
+google_electra-large-generator,dev,0.5045691906005222,51295290
+google_electra-large-generator,test,0.5204315135665251,51295290

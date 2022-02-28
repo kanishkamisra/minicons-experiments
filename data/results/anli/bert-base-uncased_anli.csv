@@ -1,0 +1,3 @@
+model,split,accuracy,parameters
+bert-base-uncased,dev,0.5130548302872062,109514298
+bert-base-uncased,test,0.5263157894736842,109514298

@@ -1,0 +1,3 @@
+model,split,accuracy,parameters
+albert-xxlarge-v2,dev,0.6096605744125326,206368944
+albert-xxlarge-v2,test,0.626675384112455,206368944
