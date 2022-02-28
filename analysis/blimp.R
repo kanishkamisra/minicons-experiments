@@ -101,8 +101,8 @@ p <- blimp %>%
   facet_wrap(~topic) + 
   theme_bw(base_size = 16, base_family = "CMU Serif") +
   theme(
-    strip.text = element_text(family = "CMU Sans Serif Medium", size = 11, face = "bold"),
-    axis.title = element_text(family = "CMU Sans Serif Medium"),
+    strip.text = element_text(family = "CMU Sans Serif", size = 11),
+    axis.title = element_text(family = "CMU Sans Serif"),
     axis.text = element_text(color = "black")
   ) +
   labs(
@@ -112,4 +112,4 @@ p <- blimp %>%
 
 p
 
-ggsave("analysis/multiberts_blimp.pdf", p, height = 6, width = 8, device = cairo_pdf, dpi = 300)
+ggsave("analysis/multiberts_blimp_2.pdf", p, height = 6, width = 8, device = cairo_pdf, dpi = 300)
