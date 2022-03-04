@@ -99,4 +99,4 @@ predicted = (torch.stack((torch.tensor(hyp1_scores), torch.tensor(hyp2_scores)))
 
 with open(f"../data/results/anli/{model}_predictions.txt", "w") as f:
     for p in predicted:
-        f.write(p+"\n")
+        f.write(f'{p}\n')
