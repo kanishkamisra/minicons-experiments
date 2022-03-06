@@ -147,20 +147,20 @@ p <- results %>%
   ggplot(aes(shorter, accuracy, color = color, fill = color)) +
   geom_col() +
   geom_hline(yintercept = 0.5097911, linetype = "dashed", color = "black") +
-  annotate("text", x = 2.5, y = 0.75, label = "ALBERT", size = 5.5, color = "#2e59a8", fontface = "bold", family = "CMU Sans Serif") +
+  annotate("text", x = 2.5, y = 0.75, label = "ALBERT", size = 5.5, color = "#2e59a8", fontface = 2, family = "CMU Sans Serif") +
   annotate("text", x = 6, y = 0.75, label = "BERT", size = 5.5, color = "#fe9929", fontface = "bold", family = "CMU Sans Serif") +
   annotate("text", x = 9, y = 0.75, label = "ELECTRA", size = 5.5, color = "#54278f", fontface = "bold", family = "CMU Sans Serif") +
   annotate("text", x = 16.5, y = 0.75, label = "GPT/GPT2", size = 5.5, color = "#93003a", fontface = "bold", family = "CMU Sans Serif") +
   annotate("text", x = 21.5, y = 0.75, label = "Eleuther AI\nGPT-Neo/J", size = 5.5, color = "#595959", fontface = "bold", family = "CMU Sans Serif") +
   annotate("text", x = 12, y = 0.75, label = "RoBERTa", size = 5.5, color = "#238443", fontface = "bold", family = "CMU Sans Serif") +
   scale_color_identity(aesthetics = c("color", "fill")) +
-  scale_y_continuous(limits = c(0, 1), expand = c(0, 0.012), breaks = scales::pretty_breaks(6), labels = scales::percent_format()) +
+  scale_y_continuous(limits = c(0, 1), expand = c(0, 0.012), breaks = scales::pretty_breaks(6)) +
   theme_bw(base_size = 18, base_family = "CMU Serif") +
   theme(
     legend.position = "None",
     # axis.text.x = element_blank(),
     plot.margin = margin(0.2, 0.2, 0.1, 0.1, "cm"),
-    axis.text.x = element_text(angle = 20, vjust = 0.5, color = "black"),
+    axis.text.x = element_text(angle = 20, vjust = 0.5, color = "black", size = 15),
     axis.text.y = element_text(color = "black"),
     axis.title.y = element_text(family = "CMU Sans Serif", color = "black"),
     axis.title.x = element_blank(),
