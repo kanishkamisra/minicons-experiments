@@ -106,10 +106,10 @@ p <- blimp %>%
     axis.text = element_text(color = "black")
   ) +
   labs(
-    x = "Steps (in 10k)",
+    x = "Training Steps (in 10k)",
     y = "Accuracy (95% CI)"
   )
 
 p
 
-ggsave("analysis/multiberts_blimp_2.pdf", p, height = 6, width = 8, device = cairo_pdf, dpi = 300)
+ggsave("analysis/multibertsblimp.pdf", p, height = 6, width = 8, device = cairo_pdf, dpi = 300)

@@ -65,7 +65,7 @@ p <- results %>%
   ggplot(aes(parameters/1e6, accuracy, color = log(parameters/1e6))) +
   geom_point(size = 3, color = "black") +
   geom_smooth(method = "lm") +
-  annotate("text", x = 10^(3.2), y = 0.51, label = "italic(R) ^ 2 == 0.48", size = 4.5, color = "black", fontface = "italic", family = "CMU Serif", parse = TRUE) +
+  annotate("text", x = 10^(3.2), y = 0.51, label = "italic(R) ^ 2 == 0.48", size = 5, color = "black", fontface = "italic", family = "CMU Serif", parse = TRUE) +
   # facet_wrap(~split) +
   # ggsci::scale_color_material("deep-purple") +
   # scale_color_distiller(palette = "BuPu", direction = 1) +
@@ -171,4 +171,4 @@ p <- results %>%
   ) +
   labs(y = "Accuracy")
 
-ggsave("analysis/anli_models.pdf", height = 4, width = 12, device = cairo_pdf, dpi = 300)
+ggsave("analysis/anlimodels.pdf", height = 4.5, width = 12, device = cairo_pdf, dpi = 300)
