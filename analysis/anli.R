@@ -18,7 +18,7 @@ results <- fs::dir_ls("data/results/anli/", regexp = "*_anli.csv") %>%
 dev_res <- results %>% filter(split == "dev")
 test_res <- results %>% filter(split == "test")
 
-cor.test(dev_res$parameters, dev_res$accuracy)
+cor.test(log(dev_res$parameters), dev_res$accuracy, method = "spearman")
 
 p <- results %>%
   inner_join(model_meta) %>%
@@ -37,7 +37,7 @@ p <- results %>%
   # scale_color_identity() +
   scale_y_continuous(breaks = c(0.5, 0.54, 0.58, 0.62)) +
   scale_x_log10() +
-  annotate()
+  # annotate()
   theme_bw(base_size = 16, base_family = "CMU Serif") +
   theme(
     legend.position = "none",

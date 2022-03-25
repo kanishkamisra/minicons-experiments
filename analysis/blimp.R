@@ -98,7 +98,7 @@ p <- blimp %>%
   geom_line(size = 0.8, color = COLOR) +
   geom_hline(data = bert_results, aes(yintercept = accuracy, linetype = model), show.legend = FALSE) +
   scale_linetype_manual(values=c("dashed", "dotdash")) +
-  facet_wrap(~topic) + 
+  facet_wrap(~topic, nrow = 2) + 
   theme_bw(base_size = 16, base_family = "CMU Serif") +
   theme(
     strip.text = element_text(family = "CMU Sans Serif", size = 11),
@@ -112,4 +112,4 @@ p <- blimp %>%
 
 p
 
-ggsave("analysis/multibertsblimp.pdf", p, height = 6, width = 8, device = cairo_pdf, dpi = 300)
+ggsave("analysis/multibertsblimp.pdf", p, height = 4, width = 11, device = cairo_pdf, dpi = 300)
