@@ -20,6 +20,12 @@ test_res <- results %>% filter(split == "test")
 
 cor.test(dev_res$parameters, dev_res$accuracy)
 
+fit = lm(log10(parameters) ~ accuracy, data = dev_res)
+
+summary(fit)
+
+predict(fit, tibble(accuracy = c(0.58, 0.6, 0.7, 0.8, 0.9)))
+
 p <- results %>%
   inner_join(model_meta) %>%
   mutate(
@@ -37,18 +43,19 @@ p <- results %>%
   # scale_color_identity() +
   scale_y_continuous(breaks = c(0.5, 0.54, 0.58, 0.62)) +
   scale_x_log10() +
-  annotate()
   theme_bw(base_size = 16, base_family = "CMU Serif") +
   theme(
     legend.position = "none",
-    strip.text = element_text(family = "CMU Sans Serif", size = 11, face = "bold"),
-    axis.title = element_text(family = "CMU Sans Serif"),
+    strip.text = element_text(family = "CMU Sans Serif Medium", size = 11, face = "bold"),
+    axis.title = element_text(family = "CMU Sans Serif Medium"),
     axis.text = element_text(color = "black")
   ) +
   labs(
     x = "Parameters (in million)",
     y = "Accuracy"
   )
+
+p
 
 ggsave("analysis/anli.pdf", p, height = 2.7, width = 4.5, device = cairo_pdf, dpi = 300)
 
@@ -62,28 +69,30 @@ p <- results %>%
     )
   ) %>%
   filter(split == "Dev") %>%
-  ggplot(aes(parameters/1e6, accuracy, color = log(parameters/1e6))) +
+  ggplot(aes(parameters, accuracy, color = log(parameters/1e6))) +
   geom_point(size = 3, color = "black") +
-  geom_smooth(method = "lm") +
-  annotate("text", x = 10^(3.2), y = 0.51, label = "italic(R) ^ 2 == 0.48", size = 5, color = "black", fontface = "italic", family = "CMU Serif", parse = TRUE) +
+  geom_smooth() +
+  annotate("text", x = 10^(3.2+6), y = 0.51, label = "italic(R) ^ 2 == 0.48", size = 5, color = "black", fontface = "italic", family = "CMU Serif", parse = TRUE) +
   # facet_wrap(~split) +
   # ggsci::scale_color_material("deep-purple") +
   # scale_color_distiller(palette = "BuPu", direction = 1) +
   # scale_color_identity() +
   scale_y_continuous(breaks = c(0.5, 0.54, 0.58, 0.62), limits = c(0.49, 0.63)) +
   scale_x_log10(breaks = scales::trans_breaks("log10", function(x) 10^x),
-                labels = scales::trans_format("log10", scales::math_format(10^.x)), limit = c(10, 10000)) +
+                labels = scales::trans_format("log10", scales::math_format(10^.x)), limit = c(1e7, 1e10)) +
   theme_bw(base_size = 18, base_family = "CMU Serif") +
   theme(
     legend.position = "none",
-    strip.text = element_text(family = "CMU Sans Serif", size = 11, face = "bold"),
-    axis.title = element_text(family = "CMU Sans Serif"),
+    strip.text = element_text(family = "CMU Sans Serif Medium", size = 11, face = "bold"),
+    axis.title = element_text(family = "CMU Sans Serif Medium"),
     axis.text = element_text(color = "black")
   ) +
   labs(
     x = "Parameters (in million)",
     y = "Accuracy"
   )
+
+p
 
 ggsave("analysis/anli.pdf", height = 4, width = 4.5, device = cairo_pdf, dpi = 300)
 
@@ -146,13 +155,17 @@ p <- results %>%
   mutate(shorter = factor(shorter, levels = levels, labels = labels)) %>%
   ggplot(aes(shorter, accuracy, color = color, fill = color)) +
   geom_col() +
-  geom_hline(yintercept = 0.5097911, linetype = "dashed", color = "black") +
-  annotate("text", x = 2.5, y = 0.75, label = "ALBERT", size = 5.5, color = "#2e59a8", fontface = 2, family = "CMU Sans Serif") +
-  annotate("text", x = 6, y = 0.75, label = "BERT", size = 5.5, color = "#fe9929", fontface = "bold", family = "CMU Sans Serif") +
-  annotate("text", x = 9, y = 0.75, label = "ELECTRA", size = 5.5, color = "#54278f", fontface = "bold", family = "CMU Sans Serif") +
-  annotate("text", x = 16.5, y = 0.75, label = "GPT/GPT2", size = 5.5, color = "#93003a", fontface = "bold", family = "CMU Sans Serif") +
-  annotate("text", x = 21.5, y = 0.75, label = "Eleuther AI\nGPT-Neo/J", size = 5.5, color = "#595959", fontface = "bold", family = "CMU Sans Serif") +
-  annotate("text", x = 12, y = 0.75, label = "RoBERTa", size = 5.5, color = "#238443", fontface = "bold", family = "CMU Sans Serif") +
+  geom_hline(yintercept = 0.5097911, linetype = "dashed", color = "black", size = 1) +
+  geom_hline(yintercept = 0.9197, linetype = "dotted", size = 1) +
+  geom_hline(yintercept = 0.9290, linetype = "solid") +
+  annotate("text", x = 2.5, y = 0.72, label = "ALBERT", size = 5.5, color = "#2e59a8", fontface = 2, family = "CMU Sans Serif") +
+  annotate("text", x = 6, y = 0.72, label = "BERT", size = 5.5, color = "#fe9929", fontface = "bold", family = "CMU Sans Serif") +
+  annotate("text", x = 9, y = 0.72, label = "ELECTRA", size = 5.5, color = "#54278f", fontface = "bold", family = "CMU Sans Serif") +
+  annotate("text", x = 16.5, y = 0.72, label = "GPT/GPT2", size = 5.5, color = "#93003a", fontface = "bold", family = "CMU Sans Serif") +
+  annotate("text", x = 21.5, y = 0.72, label = "Eleuther AI\nGPT-Neo/J", size = 5.5, color = "#595959", fontface = "bold", family = "CMU Sans Serif") +
+  annotate("text", x = 12, y = 0.72, label = "RoBERTa", size = 5.5, color = "#238443", fontface = "bold", family = "CMU Sans Serif") +
+  annotate("text", x = 2, y = 0.88, label = "SotA", size = 5.5, color = "black", family = "CMU Sans Serif", fontface="bold") +
+  annotate("text", x = 2, y = 0.97, label = "Human", size = 5.5, color = "black", family = "CMU Sans Serif", fontface="bold") +
   scale_color_identity(aesthetics = c("color", "fill")) +
   scale_y_continuous(limits = c(0, 1), expand = c(0, 0.012), breaks = scales::pretty_breaks(6)) +
   theme_bw(base_size = 18, base_family = "CMU Serif") +
@@ -171,4 +184,7 @@ p <- results %>%
   ) +
   labs(y = "Accuracy")
 
-ggsave("analysis/anlimodels.pdf", height = 4.5, width = 12, device = cairo_pdf, dpi = 300)
+p
+
+
+ggsave("analysis/anlimodels.pdf", p,height = 4.5, width = 12, device = cairo_pdf, dpi = 300)
